@@ -25,7 +25,7 @@ class GameConfigScreen extends ConsumerWidget {
                     boxText: "Palavras por pessoa",
                     configBoxTextSize: ConfigBoxTextSize.small,
                     child: NumberCounter(
-                      value: ref.watch(gameConfigViewModel).getWordsPerPlayer(),
+                      value: ref.watch(gameConfigViewModel).getWordsPerPlayer().toString(),
                       onUp: () => ref.read(gameConfigViewModel).increaseWordsPerPlayer(),
                       onDown: () => ref.read(gameConfigViewModel).decreaseWordsPerPlayer(),
                     )),
@@ -40,8 +40,7 @@ class GameConfigScreen extends ConsumerWidget {
                   boxText: "Tempo de cada rodada",
                   configBoxTextSize: ConfigBoxTextSize.small,
                   child: NumberCounter(
-                    label: "min",
-                    value: ref.watch(gameConfigViewModel).getMinutesPerRound(),
+                    value: ref.watch(gameConfigViewModel).getTimePerRoundFormated(),
                     onUp: () => ref.read(gameConfigViewModel).increaseMinutesPerRound(),
                     onDown: () => ref.read(gameConfigViewModel).decreaseMinutesPerRound(),
                   ),
@@ -50,7 +49,16 @@ class GameConfigScreen extends ConsumerWidget {
             ),
             Flexible(
               flex: 3,
-              child: ConfirmButton(onPressed: () => {}),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text(
+                    "Tempo previsto da partida: ${ref.watch(gameConfigViewModel).getTimeEstimative()} min",
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                  ConfirmButton(onPressed: () => {}),
+                ],
+              ),
             )
           ],
         ),

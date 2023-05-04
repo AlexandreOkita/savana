@@ -28,6 +28,11 @@ class MyApp extends StatelessWidget {
             fontSize: 32,
             color: Colors.white,
           ),
+          bodyMedium: TextStyle(
+            fontFamily: "MouseMemoirs",
+            fontSize: 32,
+            color: Colors.white,
+          ),
           labelLarge: TextStyle(
             fontFamily: "MouseMemoirs",
             fontSize: 40,

@@ -4,15 +4,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class NumberCounter extends ConsumerWidget {
   final Function onUp;
   final Function onDown;
-  final int value;
-  final String label;
+  final String value;
 
   const NumberCounter({
     Key? key,
     required this.onUp,
     required this.onDown,
     required this.value,
-    this.label = "",
   }) : super(key: key);
 
   @override
@@ -28,7 +26,7 @@ class NumberCounter extends ConsumerWidget {
           onPressed: () => onUp(),
         ),
         Text(
-          "$value $label",
+          value,
           style: const TextStyle(color: Colors.white, fontSize: 40, fontFamily: "MouseMemoirs"),
         ),
         IconButton(

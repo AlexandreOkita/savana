@@ -25,7 +25,7 @@ class PlayerQuantityConfigScreen extends ConsumerWidget {
                   child: ConfigBox(
                     boxText: "Número de jogadores",
                     child: NumberCounter(
-                      value: ref.watch(gameConfigViewModel).getPlayerQtt(),
+                      value: ref.watch(gameConfigViewModel).getPlayerQtt().toString(),
                       onUp: () => ref.read(gameConfigViewModel).increasePlayerQtt(),
                       onDown: () => ref.read(gameConfigViewModel).decreasePlayerQtt(),
                     ),
