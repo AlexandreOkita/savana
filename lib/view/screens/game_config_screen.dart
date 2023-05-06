@@ -4,6 +4,7 @@ import 'package:savana/view/components/config_box.dart';
 import 'package:savana/view/components/confirm_button.dart';
 import 'package:savana/view/components/number_counter.dart';
 import 'package:savana/view/components/savana_scaffold.dart';
+import 'package:savana/view/screens/write_word_screen.dart';
 import 'package:savana/viewmodel/game_config_viewmodel.dart';
 
 class GameConfigScreen extends ConsumerWidget {
@@ -56,7 +57,14 @@ class GameConfigScreen extends ConsumerWidget {
                     "Tempo previsto da partida: ${ref.watch(gameConfigViewModel).getTimeEstimative()} min",
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
-                  ConfirmButton(onPressed: () => {}),
+                  ConfirmButton(
+                      onPressed: () => {
+                            Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(builder: (context) => const WriteWordScreen()),
+                              ModalRoute.withName('/'),
+                            )
+                          }),
                 ],
               ),
             )

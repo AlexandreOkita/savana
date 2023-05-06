@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:savana/view/constants/colors.dart';
 
 class ConfigBox extends ConsumerWidget {
   final String boxText;
@@ -17,7 +18,7 @@ class ConfigBox extends ConsumerWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: const Color(0xFF789B3F),
+        color: componentColor,
       ),
       margin: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(

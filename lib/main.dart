@@ -17,28 +17,35 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         scaffoldBackgroundColor: const Color(0xFF487400),
-        textTheme: const TextTheme(
-          displayLarge: TextStyle(
-            fontFamily: "MouseMemoirs",
-            fontSize: 50,
-            color: Colors.white,
-          ),
-          displaySmall: TextStyle(
-            fontFamily: "MouseMemoirs",
-            fontSize: 32,
-            color: Colors.white,
-          ),
-          bodyMedium: TextStyle(
-            fontFamily: "MouseMemoirs",
-            fontSize: 32,
-            color: Colors.white,
-          ),
-          labelLarge: TextStyle(
-            fontFamily: "MouseMemoirs",
-            fontSize: 40,
-            color: Color(0xFF243110),
-          ),
+        listTileTheme: const ListTileThemeData(
+          textColor: Colors.white,
         ),
+        textTheme: const TextTheme(
+            displayLarge: TextStyle(
+              fontFamily: "MouseMemoirs",
+              fontSize: 50,
+              color: Colors.white,
+            ),
+            displaySmall: TextStyle(
+              fontFamily: "MouseMemoirs",
+              fontSize: 32,
+              color: Colors.white,
+            ),
+            bodyMedium: TextStyle(
+              fontFamily: "MouseMemoirs",
+              fontSize: 32,
+              color: Colors.white,
+            ),
+            labelLarge: TextStyle(
+              fontFamily: "MouseMemoirs",
+              fontSize: 40,
+              color: Color(0xFF243110),
+            ),
+            labelSmall: TextStyle(
+              fontFamily: "MouseMemoirs",
+              fontSize: 32,
+              color: Color(0xFFf09375),
+            )),
       ),
       home: const PlayerQuantityConfigScreen(),
     );
