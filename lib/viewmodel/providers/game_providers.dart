@@ -7,3 +7,5 @@ final playerWordsProvider = StateProvider<List<String>>((ref) {
 final wordsPoolProvider = StateProvider<List<String>>((ref) {
   return [];
 });
+
+final playersDoneQuantityProvider = StateProvider<int>((ref) => 0);

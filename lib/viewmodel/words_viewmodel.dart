@@ -21,6 +21,22 @@ class WordsViewModel {
   int getRemainingWordsQuantity() {
     return ref.watch(wordsPerPlayerProvider) - ref.watch(playerWordsProvider).length;
   }
+
+  int getRemainingPlayersQuantity() {
+    return ref.watch(playerQuantityProvider) - ref.watch(playersDoneQuantityProvider);
+  }
+
+  increasePlayersDone() {
+    ref.read(playersDoneQuantityProvider.notifier).state++;
+  }
+
+  flushPlayerWords() {
+    ref.read(wordsPoolProvider.notifier).state = [
+      ...ref.read(wordsPoolProvider),
+      ...ref.read(playerWordsProvider)
+    ];
+    ref.read(playerWordsProvider.notifier).state = [];
+  }
 }
 
 final wordsViewModel = Provider<WordsViewModel>((ref) {

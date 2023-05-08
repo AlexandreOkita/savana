@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:savana/view/screens/change_player_screen.dart';
 import 'package:savana/view/screens/player_quantity_config_screen.dart';
+import 'package:savana/view/screens/start_game_screen.dart';
+import 'package:savana/view/screens/write_word_screen.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -14,6 +17,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Savana',
+      routes: {
+        "/antigo": (context) => const PlayerQuantityConfigScreen(),
+        "words": (context) => const WriteWordScreen(),
+        "change_player": (context) => const ChangePlayerScreen(),
+        "/": (context) => const StartGameScreen(),
+        "/game": (context) => const PlayerQuantityConfigScreen(),
+      },
       theme: ThemeData(
         primarySwatch: Colors.blue,
         scaffoldBackgroundColor: const Color(0xFF487400),
@@ -47,7 +57,6 @@ class MyApp extends StatelessWidget {
               color: Color(0xFFf09375),
             )),
       ),
-      home: const PlayerQuantityConfigScreen(),
     );
   }
 }

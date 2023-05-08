@@ -37,6 +37,7 @@ class _WriteWordFieldState extends ConsumerState<WriteWordField> {
             child: TextField(
               controller: controller,
               style: Theme.of(context).textTheme.bodyMedium,
+              cursorColor: Colors.white,
               decoration: InputDecoration(
                 suffixIconColor: Colors.white,
                 suffixIcon: IconButton(

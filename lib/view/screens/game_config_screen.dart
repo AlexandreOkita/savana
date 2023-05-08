@@ -62,7 +62,7 @@ class GameConfigScreen extends ConsumerWidget {
                             Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(builder: (context) => const WriteWordScreen()),
-                              ModalRoute.withName('/'),
+                              ModalRoute.withName('/words'),
                             )
                           }),
                 ],

@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:savana/model/time.dart';
 import 'package:savana/viewmodel/providers/configuration_providers.dart';
+import 'package:savana/viewmodel/providers/game_providers.dart';
 
 class GameConfigViewModel {
   final ProviderRef ref;
@@ -67,6 +68,10 @@ class GameConfigViewModel {
 
     time += (time / ref.watch(timePerRoundProvider).getTotalInMinutes()) / 2;
     return time.ceil();
+  }
+
+  bool allPlayerAreDone() {
+    return ref.watch(playersDoneQuantityProvider) == ref.watch(playerQuantityProvider);
   }
 }
 
