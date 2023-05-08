@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:savana/view/screens/change_player_screen.dart';
+import 'package:savana/view/screens/new_round_screen.dart';
+import 'package:savana/view/screens/new_team_screen.dart';
 import 'package:savana/view/screens/player_quantity_config_screen.dart';
 import 'package:savana/view/screens/start_game_screen.dart';
 import 'package:savana/view/screens/write_word_screen.dart';
@@ -18,11 +20,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Savana',
       routes: {
-        "/antigo": (context) => const PlayerQuantityConfigScreen(),
+        "new_team": (context) => const PlayerQuantityConfigScreen(),
         "words": (context) => const WriteWordScreen(),
         "change_player": (context) => const ChangePlayerScreen(),
-        "/": (context) => const StartGameScreen(),
-        "/game": (context) => const PlayerQuantityConfigScreen(),
+        "start_game": (context) => const StartGameScreen(),
+        "new_round": (context) => const NewRoundScreen(),
+        "game": (context) => const PlayerQuantityConfigScreen(),
+        "/": (context) => const NewTeamScreen(),
       },
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -44,6 +48,11 @@ class MyApp extends StatelessWidget {
             bodyMedium: TextStyle(
               fontFamily: "MouseMemoirs",
               fontSize: 32,
+              color: Colors.white,
+            ),
+            bodySmall: TextStyle(
+              fontFamily: "MouseMemoirs",
+              fontSize: 20,
               color: Colors.white,
             ),
             labelLarge: TextStyle(

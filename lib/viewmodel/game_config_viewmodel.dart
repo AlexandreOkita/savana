@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:savana/model/round_type.dart';
 import 'package:savana/model/time.dart';
 import 'package:savana/viewmodel/providers/configuration_providers.dart';
 import 'package:savana/viewmodel/providers/game_providers.dart';
