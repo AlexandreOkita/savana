@@ -59,6 +59,10 @@ class GameConfigViewModel {
     return "${time.minutes} min ${time.seconds} seg";
   }
 
+  int getTimePerRoundInSeconds() {
+    return ref.watch(timePerRoundProvider).getTotalInSeconds();
+  }
+
   int getTimeEstimative() {
     final int poolSize = ref.watch(wordsPerPlayerProvider) * ref.watch(playerQuantityProvider);
     double time = 0;

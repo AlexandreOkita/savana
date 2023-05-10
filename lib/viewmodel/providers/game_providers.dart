@@ -16,6 +16,14 @@ final currentRoundProvider = StateProvider<RoundType>((ref) {
   return RoundType.definition;
 });
 
+final correctRoundWords = StateProvider<List<String>>((ref) {
+  return [];
+});
+
 final currentTeamProvider = StateProvider<Team>((ref) {
   return Team(totalScore: 0, currentRoundScore: 0, teamName: TeamName.giraffe);
+});
+
+final currentWordProvider = StateProvider<String>((ref) {
+  return "";
 });

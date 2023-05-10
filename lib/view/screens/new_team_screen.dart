@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:savana/model/team.dart';
 import 'package:savana/view/components/savana_scaffold.dart';
+import 'package:savana/view/screens/game_screen.dart';
 import 'package:savana/viewmodel/game_viewmodel.dart';
 
 class NewTeamScreen extends ConsumerWidget {
@@ -56,22 +57,29 @@ class NewTeamScreen extends ConsumerWidget {
                   )
                 ]),
               ),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: boxColor,
+              InkWell(
+                onTap: () => Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => const GameScreen()),
+                  ModalRoute.withName('/game'),
                 ),
-                height: height * 0.25,
-                width: width * 0.8,
-                child: Center(
-                  child: Text(
-                    "TOQUE PARA COMEÇAR",
-                    style: TextStyle(
-                      fontFamily: "MouseMemoirs",
-                      fontSize: 60,
-                      color: fontColor,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: boxColor,
+                  ),
+                  height: height * 0.25,
+                  width: width * 0.8,
+                  child: Center(
+                    child: Text(
+                      "TOQUE PARA COMEÇAR",
+                      style: TextStyle(
+                        fontFamily: "MouseMemoirs",
+                        fontSize: 60,
+                        color: fontColor,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
-                    textAlign: TextAlign.center,
                   ),
                 ),
               ),
