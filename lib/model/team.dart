@@ -1,5 +1,5 @@
 class Team {
-  final int totalScore;
+  int totalScore;
   final int currentRoundScore;
   final TeamName teamName;
 

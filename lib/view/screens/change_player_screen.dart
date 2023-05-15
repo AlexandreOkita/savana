@@ -24,7 +24,6 @@ class ChangePlayerScreen extends ConsumerWidget {
           textAlign: TextAlign.center,
         ),
         ConfirmButton(onPressed: () {
-          ref.read(wordsViewModel).flushPlayerWords();
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(builder: (context) => const WriteWordScreen()),

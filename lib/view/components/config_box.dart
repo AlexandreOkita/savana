@@ -22,7 +22,7 @@ class ConfigBox extends ConsumerWidget {
       ),
       margin: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Text(
             boxText,

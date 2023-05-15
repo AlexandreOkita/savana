@@ -52,6 +52,7 @@ class WriteWordScreen extends ConsumerWidget {
           flex: 1,
           child: ref.read(wordsViewModel).getRemainingWordsQuantity() == 0
               ? ConfirmButton(onPressed: () {
+                  ref.read(wordsViewModel).flushPlayerWords();
                   ref.read(wordsViewModel).increasePlayersDone();
                   if (ref.read(gameConfigViewModel).allPlayerAreDone()) {
                     return Navigator.pushAndRemoveUntil(

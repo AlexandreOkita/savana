@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:savana/view/components/confirm_button.dart';
 import 'package:savana/view/components/savana_scaffold.dart';
 import 'package:savana/view/screens/new_round_screen.dart';
-import 'package:savana/view/screens/player_quantity_config_screen.dart';
+import 'package:savana/viewmodel/game_viewmodel.dart';
 
 class StartGameScreen extends ConsumerWidget {
   const StartGameScreen({super.key});
@@ -24,11 +24,14 @@ class StartGameScreen extends ConsumerWidget {
         ),
         ConfirmButton(
             buttonText: "COMEÇAR",
-            onPressed: () => Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => const NewRoundScreen()),
-                  ModalRoute.withName('/new_round'),
-                )),
+            onPressed: () {
+              ref.watch(gameViewModel).updateStartingTeam();
+              return Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => const NewRoundScreen()),
+                ModalRoute.withName('/new_round'),
+              );
+            }),
       ]),
     );
   }

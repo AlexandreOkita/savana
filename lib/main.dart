@@ -5,6 +5,7 @@ import 'package:savana/view/screens/game_screen.dart';
 import 'package:savana/view/screens/new_round_screen.dart';
 import 'package:savana/view/screens/new_team_screen.dart';
 import 'package:savana/view/screens/player_quantity_config_screen.dart';
+import 'package:savana/view/screens/round_end_screen.dart';
 import 'package:savana/view/screens/start_game_screen.dart';
 import 'package:savana/view/screens/write_word_screen.dart';
 
@@ -22,12 +23,14 @@ class MyApp extends StatelessWidget {
       title: 'Savana',
       routes: {
         "/": (context) => const PlayerQuantityConfigScreen(),
+        // "/": (context) => const RoundEndScreen(),
         "words": (context) => const WriteWordScreen(),
         "change_player": (context) => const ChangePlayerScreen(),
         "start_game": (context) => const StartGameScreen(),
         "new_round": (context) => const NewRoundScreen(),
         "game": (context) => const GameScreen(),
         "new_team": (context) => const NewTeamScreen(),
+        "round_end": (context) => const RoundEndScreen()
       },
       theme: ThemeData(
         primarySwatch: Colors.blue,

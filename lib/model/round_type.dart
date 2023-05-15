@@ -14,6 +14,19 @@ extension RoundTypeStrings on RoundType {
     }
   }
 
+  RoundType getNext() {
+    switch (this) {
+      case RoundType.definition:
+        return RoundType.word;
+      case RoundType.word:
+        return RoundType.mimic;
+      case RoundType.mimic:
+        return RoundType.sound;
+      case RoundType.sound:
+        return RoundType.definition;
+    }
+  }
+
   String getDefinition() {
     switch (this) {
       case RoundType.definition:

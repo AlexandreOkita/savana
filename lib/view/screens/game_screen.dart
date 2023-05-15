@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:savana/view/components/confirm_button.dart';
 import 'package:savana/view/components/savana_scaffold.dart';
 import 'package:savana/view/screens/new_team_screen.dart';
+import 'package:savana/view/screens/round_end_screen.dart';
 import 'package:savana/viewmodel/game_viewmodel.dart';
 
 class GameScreen extends ConsumerStatefulWidget {
@@ -19,10 +20,12 @@ class GameScreen extends ConsumerStatefulWidget {
 class _GameScreenState extends ConsumerState<GameScreen> {
   int seconds = 60;
   bool didStarted = false;
+  late Timer timer;
 
   void startTimer() {
-    Timer.periodic(const Duration(seconds: 1), (timer) {
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (seconds == 0) {
+        ref.watch(gameViewModel).updateCurrentTeam();
         timer.cancel();
         Navigator.pushAndRemoveUntil(
           context,
@@ -35,6 +38,12 @@ class _GameScreenState extends ConsumerState<GameScreen> {
         });
       }
     });
+  }
+
+  @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
   }
 
   @override
@@ -63,6 +72,15 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                   ConfirmButton(
                     onPressed: () {
                       viewmodel.addCorrectWord();
+                      viewmodel.addPointToCurrentTeam();
+                      if (viewmodel.roundEnded()) {
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(builder: (context) => const RoundEndScreen()),
+                          ModalRoute.withName('/round_end'),
+                        );
+                      }
+                      viewmodel.getNewWord();
                     },
                     buttonText: "ACERTOU",
                   )
@@ -72,15 +90,11 @@ class _GameScreenState extends ConsumerState<GameScreen> {
           : Center(
               child: ConfirmButton(
                 onPressed: () {
-                  if (viewmodel.roundWillEnd()) {
-                    
-                  } else {
-                    setState(() {
+                  setState(() {
                     viewmodel.getNewWord();
                     startTimer();
                     didStarted = true;
                   });
-                  }
                 },
                 buttonText: "INICIAR",
               ),
