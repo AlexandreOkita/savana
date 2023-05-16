@@ -26,6 +26,14 @@ class WordsViewModel {
     return ref.watch(playerQuantityProvider) - ref.watch(playersDoneQuantityProvider);
   }
 
+  List<String> getAllWordsFromPool() {
+    return ref.read(wordsPoolProvider);
+  }
+
+  List<String> getPlayerWords() {
+    return ref.read(playerWordsProvider);
+  }
+
   increasePlayersDone() {
     ref.read(playersDoneQuantityProvider.notifier).state++;
   }

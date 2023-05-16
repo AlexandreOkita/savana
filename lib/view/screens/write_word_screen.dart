@@ -26,16 +26,13 @@ class WriteWordScreen extends ConsumerWidget {
                     "Todas as palavras foram usadas",
                     style: Theme.of(context).textTheme.labelSmall,
                   )
-                : Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 48.0),
-                    child: WriteWordField(
-                      title: "Escreva uma nova palavra",
-                      detail:
-                          "Faltam ${ref.read(wordsViewModel).getRemainingWordsQuantity()} palavras",
-                      onSend: (text) {
-                        ref.read(wordsViewModel).addWordToPlayerPool(text);
-                      },
-                    ),
+                : WriteWordField(
+                    title: "Escreva uma nova palavra",
+                    detail:
+                        "Faltam ${ref.read(wordsViewModel).getRemainingWordsQuantity()} palavras",
+                    onSend: (text) {
+                      ref.read(wordsViewModel).addWordToPlayerPool(text);
+                    },
                   ),
           ),
         ),

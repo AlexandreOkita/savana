@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:savana/view/constants/colors.dart';
+import 'package:savana/viewmodel/game_config_viewmodel.dart';
+import 'package:savana/viewmodel/game_viewmodel.dart';
+import 'package:savana/viewmodel/words_viewmodel.dart';
 
 class WriteWordField extends ConsumerStatefulWidget {
   final String title;
@@ -21,50 +24,85 @@ class WriteWordField extends ConsumerStatefulWidget {
 class _WriteWordFieldState extends ConsumerState<WriteWordField> {
   String currentText = "";
   TextEditingController controller = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+
+  void send(String text) {
+    if (_formKey.currentState!.validate()) {
+      widget.onSend(text);
+      controller.clear();
+      setState(() {
+        currentText = "";
+      });
+    }
+  }
+
+  String? validate(String? text) {
+    if (text == null || text.isEmpty) {
+      return 'Adicione uma palavra';
+    }
+    if (ref.read(wordsViewModel).getAllWordsFromPool().contains(text)) {
+      return "Essa palavra ja foi escolhida";
+    }
+    if (ref.read(wordsViewModel).getPlayerWords().contains(text)) {
+      return "Não repita palavras";
+    }
+    return null;
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Text(
-          widget.title,
-          style: Theme.of(context).textTheme.displaySmall,
-        ),
-        Center(
-          child: FractionallySizedBox(
-            widthFactor: 0.8,
-            child: TextField(
-              controller: controller,
-              style: Theme.of(context).textTheme.bodyMedium,
-              cursorColor: Colors.white,
-              decoration: InputDecoration(
-                suffixIconColor: Colors.white,
-                suffixIcon: IconButton(
-                  icon: const Icon(Icons.send),
-                  onPressed: () {
-                    widget.onSend(currentText);
-                    controller.clear();
-                  },
-                ),
-                filled: true,
-                fillColor: componentColor,
-                border: const OutlineInputBorder(
-                  borderSide: BorderSide.none,
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
-                ),
+    return Form(
+      key: _formKey,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Text(
+            widget.title,
+            style: Theme.of(context).textTheme.displaySmall,
+          ),
+          Center(
+            child: FractionallySizedBox(
+              widthFactor: 0.8,
+              child: TextFormField(
+                validator: validate,
+                controller: controller,
+                style: Theme.of(context).textTheme.bodyMedium,
+                cursorColor: Colors.white,
+                decoration: InputDecoration(
+                    suffixIconColor: Colors.white,
+                    suffixIcon: IconButton(
+                      icon: const Icon(Icons.send),
+                      onPressed: () {
+                        send(currentText);
+                      },
+                    ),
+                    filled: true,
+                    fillColor: componentColor,
+                    border: const OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                    ),
+                    errorStyle: const TextStyle(
+                        fontSize: 24, fontFamily: "MouseMemoirs", color: errorColor)),
+                onFieldSubmitted: (text) => send(text),
+                onChanged: (text) => setState(() {
+                  currentText = text;
+                }),
               ),
-              onChanged: (text) => setState(() {
-                currentText = text;
-              }),
             ),
           ),
-        ),
-        Text(
-          widget.detail,
-          style: Theme.of(context).textTheme.labelSmall,
-        )
-      ],
+          Text(
+            widget.detail,
+            style: Theme.of(context).textTheme.labelSmall,
+          )
+        ],
+      ),
     );
   }
 }
