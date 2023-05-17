@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:savana/view/constants/colors.dart';
+import 'package:savana/viewmodel/providers/sound_providers.dart';
+import 'package:savana/viewmodel/sound_viewmodel.dart';
 
 class ConfirmButton extends ConsumerWidget {
   final String buttonText;
@@ -10,7 +12,10 @@ class ConfirmButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return InkWell(
-      onTap: () => onPressed(),
+      onTap: () {
+        ref.read(soundViewModel).playClickSound();
+        onPressed();
+      },
       child: Container(
         height: 70,
         width: 160,

@@ -28,6 +28,7 @@ class PlayerQuantityConfigScreen extends ConsumerWidget {
                       value: ref.watch(gameConfigViewModel).getPlayerQtt().toString(),
                       onUp: () => ref.read(gameConfigViewModel).increasePlayerQtt(),
                       onDown: () => ref.read(gameConfigViewModel).decreasePlayerQtt(),
+                      showDown: !ref.read(gameConfigViewModel).playerQttIsMinimum(),
                     ),
                   )),
             ),

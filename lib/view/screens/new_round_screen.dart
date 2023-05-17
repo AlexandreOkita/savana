@@ -3,8 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:savana/model/round_type.dart';
 import 'package:savana/view/components/confirm_button.dart';
 import 'package:savana/view/components/savana_scaffold.dart';
-import 'package:savana/view/screens/change_player_screen.dart';
-import 'package:savana/view/screens/new_team_screen.dart';
+import 'package:savana/view/screens/game_screen.dart';
 import 'package:savana/viewmodel/game_viewmodel.dart';
 
 class NewRoundScreen extends ConsumerWidget {
@@ -30,8 +29,8 @@ class NewRoundScreen extends ConsumerWidget {
           buttonText: "COMEÇAR",
           onPressed: () => Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (context) => const NewTeamScreen()),
-            ModalRoute.withName('/new_team'),
+            MaterialPageRoute(builder: (context) => const GameScreen()),
+            ModalRoute.withName('/game'),
           ),
         )
       ]),

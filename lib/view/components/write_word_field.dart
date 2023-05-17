@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:savana/view/constants/colors.dart';
-import 'package:savana/viewmodel/game_config_viewmodel.dart';
-import 'package:savana/viewmodel/game_viewmodel.dart';
 import 'package:savana/viewmodel/words_viewmodel.dart';
 
 class WriteWordField extends ConsumerStatefulWidget {
@@ -37,14 +35,23 @@ class _WriteWordFieldState extends ConsumerState<WriteWordField> {
   }
 
   String? validate(String? text) {
-    if (text == null || text.isEmpty) {
+    if (text == null || text.trim().isEmpty) {
       return 'Adicione uma palavra';
     }
     if (ref.read(wordsViewModel).getAllWordsFromPool().contains(text)) {
-      return "Essa palavra ja foi escolhida";
+      return "Outro jogador já escolheu essa palavra";
     }
     if (ref.read(wordsViewModel).getPlayerWords().contains(text)) {
       return "Não repita palavras";
+    }
+    if (text.length < 2) {
+      return "Escreva mais de uma letra";
+    }
+    if (text.length > 16) {
+      return "Utilize até 16 letras";
+    }
+    if (RegExp(r'[^a-zA-Z\-\ ]').firstMatch(text) != null) {
+      return "Utilize apenas letras";
     }
     return null;
   }
@@ -91,6 +98,7 @@ class _WriteWordFieldState extends ConsumerState<WriteWordField> {
                     errorStyle: const TextStyle(
                         fontSize: 24, fontFamily: "MouseMemoirs", color: errorColor)),
                 onFieldSubmitted: (text) => send(text),
+                onEditingComplete: () {},
                 onChanged: (text) => setState(() {
                   currentText = text;
                 }),

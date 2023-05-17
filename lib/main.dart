@@ -4,17 +4,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:savana/view/screens/change_player_screen.dart';
 import 'package:savana/view/screens/game_screen.dart';
 import 'package:savana/view/screens/new_round_screen.dart';
-import 'package:savana/view/screens/new_team_screen.dart';
 import 'package:savana/view/screens/player_quantity_config_screen.dart';
 import 'package:savana/view/screens/round_end_screen.dart';
 import 'package:savana/view/screens/start_game_screen.dart';
 import 'package:savana/view/screens/write_word_screen.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_) {
-    runApp(const ProviderScope(child: MyApp()));
-  });
+  await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -33,7 +33,6 @@ class MyApp extends StatelessWidget {
         "start_game": (context) => const StartGameScreen(),
         "new_round": (context) => const NewRoundScreen(),
         "game": (context) => const GameScreen(),
-        "new_team": (context) => const NewTeamScreen(),
         "round_end": (context) => const RoundEndScreen()
       },
       theme: ThemeData(

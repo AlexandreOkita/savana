@@ -6,6 +6,7 @@ import 'package:savana/view/components/confirm_button.dart';
 import 'package:savana/view/components/savana_scaffold.dart';
 import 'package:savana/view/screens/new_team_screen.dart';
 import 'package:savana/view/screens/round_end_screen.dart';
+import 'package:savana/viewmodel/game_config_viewmodel.dart';
 import 'package:savana/viewmodel/game_viewmodel.dart';
 
 class GameScreen extends ConsumerStatefulWidget {
@@ -20,18 +21,19 @@ class GameScreen extends ConsumerStatefulWidget {
 class _GameScreenState extends ConsumerState<GameScreen> {
   int seconds = 60;
   bool didStarted = false;
-  late Timer timer;
+  Timer? timer;
 
   void startTimer() {
+    setState(() {
+      seconds = ref.read(gameConfigViewModel).getTimePerRoundInSeconds();
+    });
     timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (seconds == 0) {
         ref.watch(gameViewModel).updateCurrentTeam();
         timer.cancel();
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) => const NewTeamScreen()),
-          ModalRoute.withName('/new_team'),
-        );
+        setState(() {
+          didStarted = false;
+        });
       } else {
         setState(() {
           seconds--;
@@ -42,7 +44,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
 
   @override
   void dispose() {
-    timer.cancel();
+    timer?.cancel();
     super.dispose();
   }
 
@@ -51,6 +53,8 @@ class _GameScreenState extends ConsumerState<GameScreen> {
     final viewmodel = ref.watch(gameViewModel);
 
     return SavanaScaffold(
+      showAppBar: didStarted,
+      showLeaves: didStarted,
       body: didStarted
           ? Center(
               child: Column(
@@ -79,25 +83,23 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                           MaterialPageRoute(builder: (context) => const RoundEndScreen()),
                           ModalRoute.withName('/round_end'),
                         );
+                      } else {
+                        viewmodel.getNewWord();
                       }
-                      viewmodel.getNewWord();
                     },
                     buttonText: "ACERTOU",
                   )
                 ],
               ),
             )
-          : Center(
-              child: ConfirmButton(
-                onPressed: () {
-                  setState(() {
-                    viewmodel.getNewWord();
-                    startTimer();
-                    didStarted = true;
-                  });
-                },
-                buttonText: "INICIAR",
-              ),
+          : NewTeamScreen(
+              onStart: () {
+                setState(() {
+                  viewmodel.getNewWord();
+                  startTimer();
+                  didStarted = true;
+                });
+              },
             ),
     );
   }

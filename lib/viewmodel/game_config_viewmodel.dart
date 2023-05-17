@@ -43,7 +43,7 @@ class GameConfigViewModel {
   }
 
   void decreaseMinutesPerRound() {
-    if (ref.read(timePerRoundProvider.notifier).state.getTotalInSeconds() > 60) {
+    if (ref.read(timePerRoundProvider.notifier).state.getTotalInSeconds() > 30) {
       ref.read(timePerRoundProvider.notifier).state =
           ref.read(timePerRoundProvider.notifier).state.changeTimeInSeconds(-10);
     }
@@ -77,6 +77,18 @@ class GameConfigViewModel {
 
   bool allPlayerAreDone() {
     return ref.watch(playersDoneQuantityProvider) == ref.watch(playerQuantityProvider);
+  }
+
+  bool wordPerPlayerIsMinimum() {
+    return getWordsPerPlayer() == 1;
+  }
+
+  bool timePerRoundIsMinimum() {
+    return getTimePerRoundInSeconds() == 30;
+  }
+
+  bool playerQttIsMinimum() {
+    return getPlayerQtt() == 4;
   }
 }
 
