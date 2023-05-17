@@ -6,8 +6,18 @@ final soundpoolProvider = Provider<Soundpool>((ref) {
   return Soundpool.fromOptions();
 });
 
+final soundpoolEffectsProvider = Provider<Soundpool>((ref) {
+  return Soundpool.fromOptions();
+});
+
 final clickSoundProvider = Provider<Future<int>>((ref) async {
-  return await rootBundle.load("sounds/click.mp3").then((ByteData soundData) {
+  return await rootBundle.load("assets/sounds/click.mp3").then((ByteData soundData) {
     return ref.read(soundpoolProvider).load(soundData);
+  });
+});
+
+final correctSoundProvider = Provider<Future<int>>((ref) async {
+  return await rootBundle.load("assets/sounds/correct.mp3").then((ByteData soundData) {
+    return ref.read(soundpoolEffectsProvider).load(soundData);
   });
 });

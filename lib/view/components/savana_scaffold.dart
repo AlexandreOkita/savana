@@ -26,7 +26,7 @@ class SavanaScaffold extends ConsumerWidget {
             ? Positioned(
                 right: MediaQuery.of(context).size.width * 0.35,
                 child: Image.asset(
-                  "images/folhas.png",
+                  "assets/images/folhas.png",
                   scale: 1.2,
                 ),
               )
@@ -34,7 +34,7 @@ class SavanaScaffold extends ConsumerWidget {
         showLeaves
             ? Positioned(
                 top: MediaQuery.of(context).size.height * 0.9,
-                child: Image.asset("images/folha_rotacionada.png"),
+                child: Image.asset("assets/images/folha_rotacionada.png"),
               )
             : const SizedBox(),
       ],

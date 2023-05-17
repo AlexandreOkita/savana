@@ -17,7 +17,7 @@ class NewTeamScreen extends ConsumerWidget {
 
     final boxColor = team == TeamName.zebra ? Colors.black : const Color(0xffA35525);
     final fontColor = team == TeamName.zebra ? Colors.white : const Color(0xffFFDA9C);
-    final imgLocation = team == TeamName.zebra ? "images/zebra.png" : "images/giraffe.png";
+    final imgLocation = team == TeamName.zebra ? "assets/images/zebra.png" : "assets/images/giraffe.png";
 
     return Container(
         constraints: const BoxConstraints.expand(),

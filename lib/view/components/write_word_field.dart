@@ -26,7 +26,7 @@ class _WriteWordFieldState extends ConsumerState<WriteWordField> {
 
   void send(String text) {
     if (_formKey.currentState!.validate()) {
-      widget.onSend(text);
+      widget.onSend(text.trim());
       controller.clear();
       setState(() {
         currentText = "";
@@ -50,7 +50,7 @@ class _WriteWordFieldState extends ConsumerState<WriteWordField> {
     if (text.length > 16) {
       return "Utilize até 16 letras";
     }
-    if (RegExp(r'[^a-zA-Z\-\ ]').firstMatch(text) != null) {
+    if (RegExp(r'[^a-zA-Z\-\ à-ùÀ-Ù]').firstMatch(text) != null) {
       return "Utilize apenas letras";
     }
     return null;

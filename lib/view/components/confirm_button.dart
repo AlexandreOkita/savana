@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:savana/view/constants/colors.dart';
-import 'package:savana/viewmodel/providers/sound_providers.dart';
 import 'package:savana/viewmodel/sound_viewmodel.dart';
 
 class ConfirmButton extends ConsumerWidget {
   final String buttonText;
   final Function onPressed;
-  const ConfirmButton({required this.onPressed, this.buttonText = "CONFIRMAR", super.key});
+  final bool useClickSound;
+  const ConfirmButton(
+      {required this.onPressed,
+      this.buttonText = "CONFIRMAR",
+      this.useClickSound = true,
+      super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return InkWell(
       onTap: () {
-        ref.read(soundViewModel).playClickSound();
+        if (useClickSound) ref.read(soundViewModel).playClickSound();
         onPressed();
       },
       child: Container(

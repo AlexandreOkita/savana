@@ -8,6 +8,7 @@ import 'package:savana/view/screens/new_team_screen.dart';
 import 'package:savana/view/screens/round_end_screen.dart';
 import 'package:savana/viewmodel/game_config_viewmodel.dart';
 import 'package:savana/viewmodel/game_viewmodel.dart';
+import 'package:savana/viewmodel/sound_viewmodel.dart';
 
 class GameScreen extends ConsumerStatefulWidget {
   const GameScreen({super.key});
@@ -35,6 +36,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
           didStarted = false;
         });
       } else {
+        ref.read(soundViewModel).playClickSound();
         setState(() {
           seconds--;
         });
@@ -74,7 +76,9 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                     ],
                   ),
                   ConfirmButton(
+                    useClickSound: false,
                     onPressed: () {
+                      ref.read(soundViewModel).playCorrectSound();
                       viewmodel.addCorrectWord();
                       viewmodel.addPointToCurrentTeam();
                       if (viewmodel.roundEnded()) {

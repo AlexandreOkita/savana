@@ -26,12 +26,12 @@ class RoundEndScreen extends ConsumerWidget {
                     const Spacer(flex: 2),
                     ScoreBox(
                       score: ref.watch(gameViewModel).getTeamScore(TeamName.giraffe),
-                      image: const AssetImage("images/girafa_icon.png"),
+                      image: const AssetImage("assets/images/girafa_icon.png"),
                     ),
                     const Spacer(flex: 1),
                     ScoreBox(
                       score: ref.watch(gameViewModel).getTeamScore(TeamName.zebra),
-                      image: const AssetImage("images/zebra_icon.png"),
+                      image: const AssetImage("assets/images/zebra_icon.png"),
                     ),
                     const Spacer(flex: 2),
                   ],

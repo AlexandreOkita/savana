@@ -10,6 +10,11 @@ class SoundViewModel {
     int soundId = await _ref.read(clickSoundProvider);
     _ref.read(soundpoolProvider).play(soundId);
   }
+
+  void playCorrectSound() async {
+    int soundId = await _ref.read(correctSoundProvider);
+    _ref.read(soundpoolEffectsProvider).play(soundId);
+  }
 }
 
 final soundViewModel = Provider<SoundViewModel>((ref) {
