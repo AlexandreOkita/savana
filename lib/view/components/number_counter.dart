@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:savana/model/sounds.dart';
 import 'package:savana/viewmodel/sound_viewmodel.dart';
 
 class NumberCounter extends ConsumerWidget {
@@ -30,7 +31,7 @@ class NumberCounter extends ConsumerWidget {
                   color: Colors.white,
                 ),
                 onPressed: () {
-                  ref.read(soundViewModel).playClickSound();
+                  ref.read(soundViewModel).playEffectSound(EffectSounds.click);
                   onUp();
                 },
               )
@@ -47,7 +48,7 @@ class NumberCounter extends ConsumerWidget {
                   color: Colors.white,
                 ),
                 onPressed: () {
-                  ref.read(soundViewModel).playClickSound();
+                  ref.read(soundViewModel).playEffectSound(EffectSounds.click);
                   onDown();
                 },
               )

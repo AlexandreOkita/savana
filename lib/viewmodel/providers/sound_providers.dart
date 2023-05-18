@@ -1,8 +1,9 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:savana/model/sounds.dart';
 import 'package:soundpool/soundpool.dart';
 
-final soundpoolProvider = Provider<Soundpool>((ref) {
+final soundpoolBackgroundProvider = Provider<Soundpool>((ref) {
   return Soundpool.fromOptions();
 });
 
@@ -10,14 +11,20 @@ final soundpoolEffectsProvider = Provider<Soundpool>((ref) {
   return Soundpool.fromOptions();
 });
 
-final clickSoundProvider = Provider<Future<int>>((ref) async {
-  return await rootBundle.load("assets/sounds/click.mp3").then((ByteData soundData) {
-    return ref.read(soundpoolProvider).load(soundData);
-  });
-});
+final soundsProvider = Provider<Future<Sounds>>((ref) async {
+  final Map<String, int> backgroundSounds = {};
+  final Map<String, int> effectSounds = {};
 
-final correctSoundProvider = Provider<Future<int>>((ref) async {
-  return await rootBundle.load("assets/sounds/correct.mp3").then((ByteData soundData) {
-    return ref.read(soundpoolEffectsProvider).load(soundData);
-  });
+  for (BackgroundSounds sound in BackgroundSounds.values) {
+    final soundData = await rootBundle.load(sound.getAsset());
+    backgroundSounds
+        .addAll({sound.name: await ref.read(soundpoolBackgroundProvider).load(soundData)});
+  }
+
+  for (EffectSounds sound in EffectSounds.values) {
+    final soundData = await rootBundle.load(sound.getAsset());
+    effectSounds.addAll({sound.name: await ref.read(soundpoolEffectsProvider).load(soundData)});
+  }
+
+  return Sounds(backgroundSounds: backgroundSounds, effectSounds: effectSounds);
 });

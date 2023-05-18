@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:savana/model/sounds.dart';
 import 'package:savana/view/components/confirm_button.dart';
 import 'package:savana/view/components/savana_scaffold.dart';
 import 'package:savana/view/screens/new_team_screen.dart';
@@ -32,11 +33,12 @@ class _GameScreenState extends ConsumerState<GameScreen> {
       if (seconds == 0) {
         ref.watch(gameViewModel).updateCurrentTeam();
         timer.cancel();
+        ref.read(soundViewModel).playEffectSound(EffectSounds.finish);
         setState(() {
           didStarted = false;
         });
       } else {
-        ref.read(soundViewModel).playClickSound();
+        ref.read(soundViewModel).playBackgroundSound(BackgroundSounds.click);
         setState(() {
           seconds--;
         });
@@ -78,10 +80,11 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                   ConfirmButton(
                     useClickSound: false,
                     onPressed: () {
-                      ref.read(soundViewModel).playCorrectSound();
+                      ref.read(soundViewModel).playEffectSound(EffectSounds.correct);
                       viewmodel.addCorrectWord();
                       viewmodel.addPointToCurrentTeam();
                       if (viewmodel.roundEnded()) {
+                        ref.read(soundViewModel).playEffectSound(EffectSounds.winbanjo);
                         Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(builder: (context) => const RoundEndScreen()),

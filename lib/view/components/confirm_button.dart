@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:savana/model/sounds.dart';
 import 'package:savana/view/constants/colors.dart';
 import 'package:savana/viewmodel/sound_viewmodel.dart';
 
@@ -17,7 +18,7 @@ class ConfirmButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return InkWell(
       onTap: () {
-        if (useClickSound) ref.read(soundViewModel).playClickSound();
+        if (useClickSound) ref.read(soundViewModel).playEffectSound(EffectSounds.click);
         onPressed();
       },
       child: Container(

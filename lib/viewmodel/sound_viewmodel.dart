@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:savana/model/sounds.dart';
 import 'package:savana/viewmodel/providers/sound_providers.dart';
 
 class SoundViewModel {
@@ -6,14 +7,14 @@ class SoundViewModel {
 
   SoundViewModel(this._ref);
 
-  void playClickSound() async {
-    int soundId = await _ref.read(clickSoundProvider);
-    _ref.read(soundpoolProvider).play(soundId);
+  void playBackgroundSound(BackgroundSounds sound) async {
+    final sounds = await _ref.read(soundsProvider);
+    _ref.read(soundpoolBackgroundProvider).play(sounds.backgroundSounds[sound.name]!);
   }
 
-  void playCorrectSound() async {
-    int soundId = await _ref.read(correctSoundProvider);
-    _ref.read(soundpoolEffectsProvider).play(soundId);
+  void playEffectSound(EffectSounds sound) async {
+    final sounds = await _ref.read(soundsProvider);
+    _ref.read(soundpoolEffectsProvider).play(sounds.effectSounds[sound.name]!);
   }
 }
 
