@@ -18,7 +18,7 @@ class ConfirmButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return InkWell(
       onTap: () {
-        if (useClickSound) ref.read(soundViewModel).playEffectSound(EffectSounds.click);
+        if (useClickSound) ref.read(soundViewModel).playEffectSound(EffectSounds.button_click);
         onPressed();
       },
       child: Container(

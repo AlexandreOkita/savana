@@ -9,7 +9,7 @@ const _assetBase = "assets/sounds";
 
 enum BackgroundSounds { click }
 
-enum EffectSounds { click, correct, finish, winbanjo }
+enum EffectSounds { button_click, correct, error_click, finish, winbanjo }
 
 extension BackgroundSoundsExtension on BackgroundSounds {
   String getAsset() {

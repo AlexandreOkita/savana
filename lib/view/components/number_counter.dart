@@ -31,7 +31,7 @@ class NumberCounter extends ConsumerWidget {
                   color: Colors.white,
                 ),
                 onPressed: () {
-                  ref.read(soundViewModel).playEffectSound(EffectSounds.click);
+                  ref.read(soundViewModel).playEffectSound(EffectSounds.button_click);
                   onUp();
                 },
               )
@@ -48,7 +48,7 @@ class NumberCounter extends ConsumerWidget {
                   color: Colors.white,
                 ),
                 onPressed: () {
-                  ref.read(soundViewModel).playEffectSound(EffectSounds.click);
+                  ref.read(soundViewModel).playEffectSound(EffectSounds.button_click);
                   onDown();
                 },
               )

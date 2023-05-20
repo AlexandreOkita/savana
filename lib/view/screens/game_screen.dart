@@ -95,7 +95,8 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                       }
                     },
                     buttonText: "ACERTOU",
-                  )
+                  ),
+                  InkWell()
                 ],
               ),
             )
